@@ -1,0 +1,51 @@
+{
+  "compilerOptions": {
+    "plugins": [],
+    "paths": {
+    },
+    "target": "esnext",
+    "module": "commonjs",
+    "lib": [
+      "es6",
+      "dom"
+    ],
+    "outDir": "build",
+    "checkJs": false,
+    "jsx": "react",
+    "rootDir": ".",
+    "removeComments": true,
+    "noEmit": false,
+    "importHelpers": true,
+    "downlevelIteration": true,
+    "isolatedModules": false,
+    "strict": true,
+    "strictFunctionTypes": true,
+    "strictPropertyInitialization": true,
+    "noImplicitThis": true,
+    "noUnusedParameters": true,
+    "noFallthroughCasesInSwitch": true,
+    "baseUrl": "./",
+    "esModuleInterop": true,
+    "preserveSymlinks": true,
+    "allowSyntheticDefaultImports": true,
+    "noImplicitAny": true,
+    "noUnusedLocals": false,
+    "noImplicitReturns": true,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "preserveConstEnums": false,
+    "allowJs": true,
+    "sourceMap": true,
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "alwaysStrict": true,
+    "strictNullChecks": true,
+    "skipLibCheck": true
+  },
+  "exclude": [
+    "node_modules",
+    "babel.config.js",
+    "metro.config.js",
+    "jest.config.js"
+  ]
+}

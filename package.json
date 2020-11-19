@@ -1,0 +1,28 @@
+{
+  "name": "reactNativeTemplate",
+  "version": "0.0.1",
+  "description": "Clean and minimalist React Native template for a quick start with TypeScript.",
+  "scripts": {
+    "prepublishOnly": "npm --no-git-tag-version version $TRAVIS_TAG"
+  },
+  "files": [
+    "template",
+    "template.config.js"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/epifanovmd/reactNativeTemplate.git"
+  },
+  "keywords": [
+    "react-native",
+    "typescript",
+    "template",
+    "boilerplate"
+  ],
+  "author": "Andrey Epifanov <epifanovmd@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/epifanovmd/reactNativeTemplate/issues"
+  },
+  "homepage": "https://github.com/epifanovmd/reactNativeTemplate#readme"
+}
