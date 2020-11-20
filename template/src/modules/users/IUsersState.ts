@@ -1,5 +1,5 @@
 import { IReduxData } from "../../store/IAppState";
-import { INormalizeData } from "../../common/normalaizer";
+import { INormalizeData } from "../../common/normalizer";
 import { IUser } from "../../api/dto/Users.g";
 import { LoadState } from "../../common/loadState";
 

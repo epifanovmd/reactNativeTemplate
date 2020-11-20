@@ -5,7 +5,7 @@ import { IUser } from "src/api/dto/Users.g";
 
 import styled from "styled-components/native";
 import { UsersActions } from "../../modules/users/reduxToolKit";
-import { INormalizeData } from "../../common/normalaizer";
+import { INormalizeData } from "../../common/normalizer";
 
 interface IProps {
   users: INormalizeData<IUser, "id">;

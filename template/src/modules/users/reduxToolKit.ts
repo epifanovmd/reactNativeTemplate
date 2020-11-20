@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import { callApiToolkit } from "../../store/common/apiActionsAsync";
 import { IUser } from "../../api/dto/Users.g";
 import { RequestType } from "../../common/requestType";
-import { createNormalize } from "../../common/normalaizer";
+import { createNormalize } from "../../common/normalizer";
 import { IUsersState, usersInitialState } from "./IUsersState";
 import { LoadState } from "../../common/loadState";
 
