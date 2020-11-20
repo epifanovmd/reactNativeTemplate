@@ -40,8 +40,10 @@ export interface IFetchParams<R, QP, P> {
 }
 
 type TCalcType<QP, P> = QP extends void
-  ? void & (P extends void ? void : { args: P })
-  : { params: QP } | (P extends void ? void : { args: P } & { params: QP });
+  ? {} & (P extends void ? void : { args: P })
+  : P extends void
+    ? { params: QP }
+    : { args: P } & { params: QP };
 
 export const callApiToolkit = <R, QP = void, P = void>({
   url,
@@ -54,9 +56,11 @@ export const callApiToolkit = <R, QP = void, P = void>({
 }: IFetchParams<R, QP, P>) =>
   createAsyncThunk<
     IResponse<R>,
-    | { onSuccess?: TSuccessCallback<R> }
-    | void
-    | ({ onSuccess?: TSuccessCallback<R> } & TCalcType<QP, P>),
+    QP extends void
+      ? P extends void
+      ? void
+      : { onSuccess?: TSuccessCallback<R> } & TCalcType<QP, P>
+      : { onSuccess?: TSuccessCallback<R> } & TCalcType<QP, P>,
     {
       dispatch: ThunkDispatch<IAppState, IExtraArguments, Action>;
       state: IAppState;
