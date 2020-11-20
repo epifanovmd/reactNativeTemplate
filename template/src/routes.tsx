@@ -1,7 +1,7 @@
 import React, { FC, memo } from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Header } from "./components/layouts/header/header";
-import Users from "./modules/users/Users";
+import Users from "./pages/users/Users";
 import { useTranslation } from "./common/hooks/useTranslation";
 
 const Tab = createBottomTabNavigator();

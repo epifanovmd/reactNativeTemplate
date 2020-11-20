@@ -1,10 +1,10 @@
 import React, { FC, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchUsers } from "./reduxToolKit";
 import { IAppState } from "../../store/IAppState";
 import { UserList } from "../../components/userList/userList";
 import styled from "styled-components/native";
+import {fetchUsers} from "./UsersActions";
 
 interface IProps {}
 

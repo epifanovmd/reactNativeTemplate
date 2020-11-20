@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { IUser } from "src/api/dto/Users.g";
 
 import styled from "styled-components/native";
-import { UsersActions } from "../../modules/users/reduxToolKit";
+import { UsersActions } from "../../pages/users/UsersReducers";
 import { INormalizeData } from "../../common/normalizer";
 
 interface IProps {

@@ -1,18 +1,11 @@
-import { createSlice } from "@reduxjs/toolkit";
-import { callApiToolkit } from "../../store/common/apiActionsAsync";
-import { IUser } from "../../api/dto/Users.g";
-import { RequestType } from "../../common/requestType";
-import { createNormalize } from "../../common/normalizer";
-import { IUsersState, usersInitialState } from "./IUsersState";
-import { LoadState } from "../../common/loadState";
+import {createSlice} from "@reduxjs/toolkit";
+import {IUser} from "../../api/dto/Users.g";
+import {createNormalize} from "../../common/normalizer";
+import {IUsersState, usersInitialState} from "./UsersState";
+import {LoadState} from "../../common/loadState";
+import {fetchUsers} from "./UsersActions";
 
-export const fetchUsers = callApiToolkit<IUser[]>({
-  url: "users",
-  method: RequestType.GET,
-  actionType: "USERS/GET_USERS",
-});
-
-const { fromResponse, reducers } = createNormalize<IUser, IUsersState>();
+const {fromResponse, reducers} = createNormalize<IUser, IUsersState>();
 
 export const usersSlice = createSlice({
   name: "users",
