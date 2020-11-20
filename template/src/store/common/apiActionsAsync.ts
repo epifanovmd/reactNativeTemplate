@@ -58,7 +58,7 @@ export const callApiToolkit = <R, QP = void, P = void>({
     IResponse<R>,
     QP extends void
       ? P extends void
-      ? void
+      ? { onSuccess?: TSuccessCallback<R> } | void
       : { onSuccess?: TSuccessCallback<R> } & TCalcType<QP, P>
       : { onSuccess?: TSuccessCallback<R> } & TCalcType<QP, P>,
     {
