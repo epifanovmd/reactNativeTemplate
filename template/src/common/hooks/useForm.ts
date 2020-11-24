@@ -14,10 +14,12 @@ interface IUseForm<T> {
     errors: Partial<Record<keyof T | string, string>>,
   ) => void;
   validate?: (values: T) => Partial<Record<keyof T | string, string>>;
-  validateSchema?: ObjectSchema<Shape<object, Partial<Record<keyof T, any>>>>;
+  validateSchema?: ObjectSchema<
+    Shape<object | undefined, Partial<Record<keyof T, any>>>,
+    object
+    >;
   validateOnInit?: boolean;
 }
-
 export const useForm = <T extends object>(
   {
     initialValues,
@@ -32,10 +34,10 @@ export const useForm = <T extends object>(
   const [values, setValues] = React.useState<T>(initialValues);
   const [touchedValues, setTouchedValues] = React.useState<
     Partial<Record<keyof T | string, boolean>>
-  >({});
+    >({});
   const [errors, setErrors] = React.useState<
     Partial<Record<keyof T | string, string>>
-  >({});
+    >({});
 
   const _validate = useCallback(
     (
@@ -111,7 +113,7 @@ export const useForm = <T extends object>(
           : null;
 
         setErrors(err => (e ? e : err));
-        _finally && _finally(_values, { ...e });
+        _finally && _finally(_values, { ...e } as any);
       }
 
       return _values;
@@ -188,9 +190,9 @@ export const useForm = <T extends object>(
             (item: any, ind: number) =>
               index && ind === +index
                 ? {
-                    ...item,
-                    [key]: value,
-                  }
+                  ...item,
+                  [key]: value,
+                }
                 : item,
           );
           let newValues = state;
@@ -213,20 +215,21 @@ export const useForm = <T extends object>(
           | ((state: T) => TCheckArray<A>[keyof TCheckArray<A>])
           | TCheckArray<A>[keyof TCheckArray<A>],
         index: number,
+        touch?: boolean,
       ) => {
         setValues(state => {
           state[name] = ((state[name] as any) || []).map(
             (item: any, ind: number) =>
               ind === +index
                 ? {
-                    ...item,
-                    [key]:
-                      typeof value === "function"
-                        ? (value as (
-                            state: T,
-                          ) => TCheckArray<A>[keyof TCheckArray<A>])(state)
-                        : value,
-                  }
+                  ...item,
+                  [key]:
+                    typeof value === "function"
+                      ? (value as (
+                      state: T,
+                      ) => TCheckArray<A>[keyof TCheckArray<A>])(state)
+                      : value,
+                }
                 : item,
           );
           let newValues = state;
@@ -244,6 +247,12 @@ export const useForm = <T extends object>(
 
           return newValues;
         });
+        !touchedValues[name] &&
+        touch &&
+        setTouchedValues(state => ({
+          ...state,
+          [name]: true,
+        }));
       },
     }),
     [setValues, _validate, watch],
@@ -325,7 +334,11 @@ export const useForm = <T extends object>(
   );
 
   const setFieldValue = useCallback(
-    (name: keyof T, value: ((state: T) => T[keyof T]) | T[keyof T]) => {
+    (
+      name: keyof T,
+      value: ((state: T) => T[keyof T]) | T[keyof T],
+      touch?: boolean,
+    ) => {
       setValues(state => {
         state[name] =
           typeof value === "function"
@@ -344,10 +357,11 @@ export const useForm = <T extends object>(
         return newValues;
       });
       !touchedValues[name] &&
-        setTouchedValues(state => ({
-          ...state,
-          [name]: true,
-        }));
+      touch &&
+      setTouchedValues(state => ({
+        ...state,
+        [name]: true,
+      }));
     },
     [setValues, setTouchedValues, _validate, touchedValues, watch],
   );
