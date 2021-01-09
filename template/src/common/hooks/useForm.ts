@@ -98,7 +98,13 @@ export const useForm = <T extends object>(
                 }
               });
 
-              if (Object.keys(prevErrors).length !== Object.keys(e).length) {
+              const prevKeys = Object.keys(prevErrors);
+              const eKeys = Object.keys(e);
+
+              if (
+                prevKeys.length !== eKeys.length ||
+                prevKeys.some(key => prevErrors[key] !== e[key])
+              ) {
                 // eslint-disable-next-line no-param-reassign
                 e = { ...e };
               }
